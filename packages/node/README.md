@@ -62,6 +62,8 @@ export function main(event: CloudBasePayload, context: CloudBaseContext) {
 const cloudbase = require('@bytegem/cloudbase');
 
 class NewCommand extends cloudbase.Command {
+    // 方法前面还可以添加 async 变成异步方法：
+    // async handle(app, payload)
     handle(app, payload) {
         console.log(payload);
         return {name: app.name};
@@ -86,13 +88,15 @@ exports.main = (event, context) {
 import { Application, Command } from "@bytegem/cloudbase";
 
 class NewCommand extends Command {
+    // 方法前面还可以添加 async 变成异步方法：
+    // async handle(app, payload)
     handle(app, payload) {
         console.log(payload);
         return {name: app.name};
     }
 }
 
-export main(event, context) {
+export function main(event, context) {
     const app = new Application({
         context,
         name: "new-function-commander"
@@ -113,6 +117,21 @@ export main(event, context) {
     "data": "", // any
 }
 ```
+
+### 函数返回
+
+我们为了方便客户端解析，针对响应数据做了封装:
+
+```json
+{
+    "status": false, // true 表示没有错误，正常运行；false 表示错误
+    "code": "unsupported", // 仅错误状态出现字段
+    "message": "Unsupported command", // 仅错时出现
+    "data": ..., // 取决于命令返回的数据类型，仅正确时存在
+}
+```
+
+可根据 "status" 进行正确与否的判断。
 
 ## LICENSE
 
