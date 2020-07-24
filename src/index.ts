@@ -2,7 +2,8 @@ import { Command } from "./command";
 import { CloudBasePayload } from "./cloudbase-payload";
 import { CloudBaseError } from "./error";
 import { VersionCommand } from "./commands/version";
-import { IContext } from "@cloudbase/node-sdk/lib/type";
+import { CloudBase } from "@cloudbase/node-sdk/lib/cloudbase";
+import { IContext, ICloudBaseConfig } from "@cloudbase/node-sdk/lib/type";
 
 export {Command, CloudBaseError, CloudBasePayload, VersionCommand};
 
@@ -10,10 +11,13 @@ export interface CloudBaseContext extends IContext {
     [name: string]: any;
 }
 
+export interface CloudBaseConfig extends ICloudBaseConfig {}
+
 export interface AppConstructor {
     context: CloudBaseContext;
     name: string;
     version?: string;
+    config?: CloudBaseConfig;
 }
 
 export class Application {
@@ -22,12 +26,17 @@ export class Application {
     commands: Map<string, () => Command>;
     context: CloudBaseContext;
     payload?: CloudBasePayload;
+    cloudbase: CloudBase;
 
-    constructor({name, context, version = 'unknown'}: AppConstructor) {
+    constructor({name, context, config, version = 'unknown'}: AppConstructor) {
         this.version = version;
         this.name = name;
         this.context = context;
         this.commands = new Map<string, () => Command>();
+        this.cloudbase = new CloudBase({
+            env: context.namespace,
+            ...(config ?? {}),
+        });
 
         this.addCommand('version', () => new VersionCommand);
     }
