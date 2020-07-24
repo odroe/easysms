@@ -2,6 +2,7 @@ import { Command } from "./command";
 import { CloudBasePayload } from "./cloudbase-payload";
 import { CloudBaseError } from "./error";
 import { VersionCommand } from "./commands/version";
+import { init as createCloudBaseApp  } from "@cloudbase/node-sdk";
 import { CloudBase } from "@cloudbase/node-sdk/lib/cloudbase";
 import { IContext, ICloudBaseConfig } from "@cloudbase/node-sdk/lib/type";
 
@@ -33,7 +34,7 @@ export class Application {
         this.name = name;
         this.context = context;
         this.commands = new Map<string, () => Command>();
-        this.cloudbase = new CloudBase(Object.assign({env: context.namespace}, config));
+        this.cloudbase = createCloudBaseApp(Object.assign({env: context.namespace}, config));
 
         this.addCommand('version', () => new VersionCommand);
     }

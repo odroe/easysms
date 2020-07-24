@@ -17,5 +17,5 @@ export default {
             }
         }),
     ],
-    external: ["@cloudbase/node-sdk/lib/cloudbase"],
+    external: ["@cloudbase/node-sdk"],
 };
