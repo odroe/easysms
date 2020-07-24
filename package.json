@@ -16,5 +16,9 @@
   },
   "scripts": {
     "build": "tsc"
-  }
+  },
+  "files": [
+    "lib",
+    "types"
+  ]
 }
