@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "author": "Byte Gem <service@bytegem.net>",
+  "license": "MIT",
   "repository": "github:bytegem/cloudbase",
   "dependencies": {
     "@cloudbase/node-sdk": "^2.2.3"
