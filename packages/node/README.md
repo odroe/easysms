@@ -70,7 +70,7 @@ class NewCommand extends cloudbase.Command {
 
 
 exports.main = (event, context) {
-    const app = cloudbase.Application({
+    const app = new cloudbase.Application({
         context,
         name: "new-function-commander"
     });
@@ -93,7 +93,7 @@ class NewCommand extends Command {
 }
 
 export main(event, context) {
-    const app = cloudbase.Application({
+    const app = new Application({
         context,
         name: "new-function-commander"
     });
