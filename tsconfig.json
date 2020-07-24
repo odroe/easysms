@@ -3,16 +3,13 @@
         "baseUrl": ".",
         "outDir": "lib",
         "target": "ESNext",
-        "module": "CommonJS",
+        "module": "ES6",
+        "moduleResolution": "node",
         "strict": true,
         "types": ["node"],
         "resolveJsonModule": true,
-        "paths": {
-            "@bytegem/cloudbase": [
-                "src"
-            ]
-        },
         "declaration": true,
+        "emitDeclarationOnly": true,
         "declarationDir": "types"
     },
     "include": ["src"],
