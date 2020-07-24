@@ -33,10 +33,7 @@ export class Application {
         this.name = name;
         this.context = context;
         this.commands = new Map<string, () => Command>();
-        this.cloudbase = new CloudBase({
-            env: context.namespace,
-            ...(config ?? {}),
-        });
+        this.cloudbase = new CloudBase(Object.assign({env: context.namespace}, config));
 
         this.addCommand('version', () => new VersionCommand);
     }
