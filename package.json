@@ -1,6 +1,6 @@
 {
   "name": "@bytegem/cloudbase",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Tencent CloudBase functions toolkit.",
   "main": "index.js",
   "types": "types/index.d.ts",
