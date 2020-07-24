@@ -20,6 +20,7 @@
     "build": "tsc && rollup -c"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "types"
   ]
 }
