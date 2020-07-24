@@ -1,0 +1,19 @@
+{
+  "name": "@bytegem/cloudbase",
+  "version": "0.0.1",
+  "description": "Tencent CloudBase functions toolkit.",
+  "main": "lib/index.js",
+  "types": "types/index.d.ts",
+  "author": "Byte Gem <service@bytegem.net>",
+  "repository": "github:bytegem/cloudbase",
+  "dependencies": {
+    "@cloudbase/node-sdk": "^2.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.25",
+    "typescript": "^3.9.7"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}
