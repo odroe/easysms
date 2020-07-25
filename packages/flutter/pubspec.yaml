@@ -10,6 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cloudbase_core: 0.0.10
+  cloudbase_auth: 0.0.13
+  cloudbase_function: 0.0.2
+  cloudbase_storage: 0.0.3
+  cloudbase_database: 0.0.11
 
 dev_dependencies:
   flutter_test:
