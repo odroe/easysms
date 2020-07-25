@@ -3,8 +3,7 @@ import 'main.dart' show CloudBase;
 
 export 'package:cloudbase_storage/cloudbase_storage.dart';
 
-/// 拓展 [storage] 获取 [CloudBaseStorage] 对象到
-/// [CloudBase] 对象上。
+/// 拓展 [CloudBaseStorage] 对象到 [CloudBase] 对象上。
 extension CloudBaseExtensionStorage on CloudBase {
   /// 获取 [CloudBaseStorage] 环境下的实例对象
   ///

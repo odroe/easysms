@@ -7,7 +7,7 @@ import 'command.dart' show CloudBaseFunctionBaseCommand;
 export 'command.dart';
 export 'exceptions.dart';
 
-/// 拓展 CloudBase Function 相关方法到 [CloudBase] 对象上。
+/// 拓展 [CloudBaseFunction] 相关方法到 [CloudBase] 对象上。
 extension CloudBaseExtensionFunction on CloudBase {
   /// 获取 [CloudBaseFunction] 对象。
   ///
@@ -34,11 +34,22 @@ extension CloudBaseExtensionFunction on CloudBase {
           [Map<String, dynamic> params]) =>
       function.callFunction(name, params);
 
+  /// 云函数命令调用方法
+  ///
+  /// [command] 用来传递本地编写好的云函数命令，返回
+  /// 值为基础命令所标注的数据类型。
+  ///
+  /// Example：
+  /// ```dart
+  /// VersionInfo info = cloudbase.command(VersionCommand());
+  /// ```
   Future<T> command<T>(CloudBaseFunctionBaseCommand<T> command) async {
-    CloudBaseResponse response =
+    // 调用云函数并获得云函数的 [response]
+    final CloudBaseResponse response =
         await callFunction(command.functionName, command.getParams.toJson());
-    Map<String, dynamic> data = command.getCommandResponseData(response);
-    command.commandResponseDataValidator(data);
+
+    // 获取云函数的数据响应
+    final Map<String, dynamic> data = command.getCommandResponseData(response);
 
     return command.deserializer(
         command.getCommandResponseVerifiedData(data), response);

@@ -1,8 +1,11 @@
 name: cloudbase
-description: CloudBase fast development toolkit.
-version: 0.0.2
-author: Byte Gem <service@bytegem.net>
-homepage: https://github.com/bytegem/cloudbase
+description: >-
+  CloudBase 快速开发工具，主要整合当前 cloudbase_* 的包；
+  并进行了优化封装。同时增加与云函数开发包配套的命令调用。
+
+version: 0.0.3
+homepage: https://github.com/bytegem/cloudbase/packages/flutter
+repository: https://github.com/bytegem/cloudbase
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -10,11 +13,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cloudbase_core: 0.0.10
-  cloudbase_auth: 0.0.13
-  cloudbase_function: 0.0.2
-  cloudbase_storage: 0.0.3
-  cloudbase_database: 0.0.11
+  cloudbase_core: ^0.0.10
+  cloudbase_auth: ^0.0.13
+  cloudbase_function: ^0.0.2
+  cloudbase_storage: ^0.0.3
+  cloudbase_database: ^0.0.11
 
 dev_dependencies:
   flutter_test:

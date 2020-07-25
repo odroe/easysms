@@ -7,6 +7,10 @@ export 'storage.dart';
 export 'function/main.dart';
 export 'exceptions/exceptions.dart';
 
+/// CloudBase 应用
+///
+/// 这是一个贯穿全局的核心应用，所有数据和调用方法
+/// 都挂载在这个类上。
 class CloudBase {
   /// 缓存当前 [envId] 下的 CloudBase 实例
   static Map<String, CloudBase> _instances = {};
@@ -42,7 +46,7 @@ class CloudBase {
   /// 通过 [envId] 获取已经存在的实例。
   ///
   /// 方法不会创建新的实例进行缓存，而是从缓存的实例中进行判断，如
-  /// 果存在实例，则直接返回。否则将抛出一个 [CloudBaseInstanceDoesNotExists]
+  /// 果存在实例，则直接返回。否则将抛出一个 [CloudBaseInstanceDoesNotExistsException]
   /// 错误，开发者可以接受该错误判断是否需要进行实例创建。
   ///
   /// 常用地方为页面深处，因为一般都是在启动的 main 函数中进行了
@@ -57,7 +61,7 @@ class CloudBase {
       return _instances[envId];
     }
 
-    throw CloudBaseInstanceDoesNotExists(envId);
+    throw CloudBaseInstanceDoesNotExistsException(envId);
   }
 
   /// 从 CloudBase 单例缓存中获取对象
@@ -95,7 +99,7 @@ class CloudBase {
       return CloudBase(credentials);
     }
 
-    throw CloudBaseInstanceDoesNotExists('single');
+    throw CloudBaseInstanceDoesNotExistsException();
   }
 
   /// 获取唯一 CloudBase 单例。

@@ -3,7 +3,9 @@ import 'dart:convert' show jsonEncode;
 import '../main.dart' show CloudBaseResponse;
 import 'exceptions.dart';
 
-/// 云函数 params 构造器
+/// 云函数 params 构造器。
+///
+/// 主要用于创建云函数 command 的 parmas 参数结构.
 class CloudBaseFunctionCommandParams {
   /// 云函数命令名称
   ///
@@ -39,6 +41,7 @@ class CloudBaseFunctionCommandParams {
   String toString() => jsonEncode(toJson());
 }
 
+/// 云函数命令基类，用于编写云函数命命令调用的参数信息。
 abstract class CloudBaseFunctionBaseCommand<T> {
   /// 当前命令所需要调用的云函数名称。
   ///
@@ -111,7 +114,7 @@ abstract class CloudBaseFunctionBaseCommand<T> {
   ///   "data":  // any
   /// }
   /// ```
-  /// 方法主要验证 [response.data] 是不是上述的 `Map` 结构。
+  /// 方法主要验证 `response.data` 是不是上述的 `Map` 结构。
   Map<String, dynamic> getCommandResponseData(CloudBaseResponse response) {
     if (response.data is Map<String, dynamic>) {
       return response.data;
@@ -120,8 +123,16 @@ abstract class CloudBaseFunctionBaseCommand<T> {
     throw CloudBaseFunctionCommandResponseDataAssetException();
   }
 
+  /// 验证云函数命令返回的数据是否时运行成功状态。
+  ///
+  /// 云函数命令 SDK 无论是成功与否都是以成功消进行返回，所以
+  /// 我们需要对命令应用的消息解析判断。
+  ///
+  /// [data] 为云函数调用的 `response.data` 数据。
+  ///
+  /// [withThrow] 表示验证如果失败，是否进行异常抛出。
   bool commandResponseDataValidator(Map<String, dynamic> data,
-      [bool withThrow = false]) {
+      {bool withThrow = false}) {
     if (data['status'] == true) {
       return true;
     } else if (withThrow) {
@@ -131,8 +142,16 @@ abstract class CloudBaseFunctionBaseCommand<T> {
     return false;
   }
 
-  dynamic getCommandResponseVerifiedData(Map<String, dynamic> data) =>
-      data['data'];
+  /// 获取验证后的云函数命令返回数据。
+  ///
+  /// 方法会先调用 [commandResponseDataValidator] 进行数据验证，
+  /// 验证失败时，直接抛出一个 [CloudBaseFunctionCommandException]
+  /// 消息，验证成功则直接返回云函数命令的 `handle` 方法所返回的数据。
+  dynamic getCommandResponseVerifiedData(Map<String, dynamic> data) {
+    commandResponseDataValidator(data, withThrow: true);
+
+    return data['data'];
+  }
 
   /// Returns a string representation of this object.
   @override
