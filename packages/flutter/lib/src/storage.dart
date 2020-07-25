@@ -7,11 +7,11 @@ export 'package:cloudbase_storage/cloudbase_storage.dart';
 /// [CloudBase] 对象上。
 extension CloudBaseExtensionStorage on CloudBase {
   /// 获取 [CloudBaseStorage] 环境下的实例对象
-  /// 
+  ///
   /// Example:
   /// ```
   /// const cloudbase = CloudBase(/* credentials */);
-  /// 
+  ///
   /// cloudbase.storage.downloadFile('fileId', '/tmp/tmp.file')
   ///   .then(/** You then method */)
   ///   .catch((e) => {/** You catch method */});

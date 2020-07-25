@@ -1,5 +1,7 @@
-class CloudBaseFunctionCommandResponseDataAssetException extends AssertionError {
-  CloudBaseFunctionCommandResponseDataAssetException(): super('response data don\'t is cloudbase command data.');
+class CloudBaseFunctionCommandResponseDataAssetException
+    extends AssertionError {
+  CloudBaseFunctionCommandResponseDataAssetException()
+      : super('response data don\'t is cloudbase command data.');
 }
 
 class CloudBaseFunctionCommandException extends Error {
