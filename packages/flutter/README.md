@@ -117,7 +117,7 @@ const cloudbase = CloudBase.instance;
 
 ## 云函数命令
 
-在使用了配套的[云函数 SDK 开发工具](../node)时，这将是一个很好的获取选项
+在使用了配套的[云函数 SDK 开发工具](https://github.com/bytegem/cloudbase/tree/master/packages/node)时，这将是一个很好的获取选项
 
 ### 编写命令
 
@@ -162,4 +162,4 @@ try {
 
 ## LICENSE
 
-[MIT License](../../LICENSE)
+[MIT License](https://github.com/bytegem/cloudbase/blob/master/LICENSE)
