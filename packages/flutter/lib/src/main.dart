@@ -4,6 +4,7 @@ import 'exceptions/exceptions.dart';
 export 'auth.dart';
 export 'core.dart';
 export 'storage.dart';
+export 'database.dart';
 export 'function/main.dart';
 export 'exceptions/exceptions.dart';
 
