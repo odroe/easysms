@@ -63,8 +63,8 @@ print(result);
 - [x] CloudBase 服务端云函数 SDK
 - [x] 云函数集成 CloudBase 官方服务端 SDK
 - [x] CloudBase Flutter
-- [x] 网页 SDK
-- [x] 微信小程序 SDK
+- [ ] 网页 SDK
+- [ ] 微信小程序 SDK
 
 ## LICENSE
 
