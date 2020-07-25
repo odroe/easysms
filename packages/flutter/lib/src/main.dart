@@ -24,6 +24,12 @@ class CloudBase {
   /// 创建当前核心实例
   CloudBase._(this._core);
 
+  /// 单例工厂，今之处已经使用 [CloudBase.single] 或
+  /// [CloudBase.create] 创建后使用，直接使用会抛出
+  /// 找不到对象的异常
+  factory CloudBase([CloudBaseCoreCredentials credentials]) =>
+      CloudBase.single(credentials);
+
   /// 单例工厂创建或者获取 CloudBase 实例
   ///
   /// 在 [credentials.envId] 不变的情况下，始终获取单例,
@@ -36,9 +42,9 @@ class CloudBase {
   ///   envId: "You env id",
   ///   /* more... */
   /// );
-  /// const cloudbase = CloudBase(credentials);
+  /// const cloudbase = CloudBase.create(credentials);
   /// ```
-  factory CloudBase(CloudBaseCoreCredentials credentials) {
+  factory CloudBase.create(CloudBaseCoreCredentials credentials) {
     return _instances.putIfAbsent(
         credentials.envId, () => CloudBase._(CloudBaseCore(credentials)));
   }
@@ -96,7 +102,7 @@ class CloudBase {
     if (instance != null && instance is CloudBase) {
       return instance;
     } else if (credentials is CloudBaseCoreCredentials) {
-      return CloudBase(credentials);
+      return CloudBase.create(credentials);
     }
 
     throw CloudBaseInstanceDoesNotExistsException();
