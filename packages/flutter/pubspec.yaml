@@ -3,7 +3,7 @@ description: >-
   CloudBase 快速开发工具，主要整合当前 cloudbase_* 的包；
   并进行了优化封装。同时增加与云函数开发包配套的命令调用。
 
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/bytegem/cloudbase/packages/flutter
 repository: https://github.com/bytegem/cloudbase
 

@@ -1,4 +1,5 @@
-import 'package:cloudbase_core/cloudbase_core.dart' show CloudBaseConfig;
+import 'package:cloudbase_core/cloudbase_core.dart'
+    show CloudBaseConfig, CloudBaseCore;
 
 export 'package:cloudbase_core/cloudbase_core.dart';
 
@@ -49,5 +50,15 @@ class CloudBaseCoreCredentials extends CloudBaseConfig {
     }
 
     return env;
+  }
+}
+
+/// 给 [CloudBaseCore] 拓展一个修改单例配置的方法。
+///
+/// 实用场景为需要懂该更新环境下的配置情况，但是因为核心实现是环境单例
+/// 的，一旦创建就无法修改。所以拓展是为了修改核心配置而出现。
+extension UpdateCloudBaseCoreCredentialsExtension on CloudBaseCore {
+  updateCredentials(CloudBaseCoreCredentials credentials) {
+    config = credentials;
   }
 }

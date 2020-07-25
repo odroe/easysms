@@ -1,4 +1,8 @@
-import 'core.dart' show CloudBaseCore, CloudBaseCoreCredentials;
+import 'core.dart'
+    show
+        CloudBaseCore,
+        CloudBaseCoreCredentials,
+        UpdateCloudBaseCoreCredentialsExtension;
 import 'exceptions/exceptions.dart';
 
 export 'auth.dart';
@@ -23,13 +27,21 @@ class CloudBase {
   CloudBaseCore get core => _core;
 
   /// 创建当前核心实例
-  CloudBase._(this._core);
+  ///
+  /// 如果存在实例，则进行更新。
+  CloudBase(CloudBaseCoreCredentials credentials) {
+    // 可能存在核心单例已经存在的情况，用这个方法进行强制更新配置.
+    _core = CloudBaseCore(credentials)..updateCredentials(credentials);
 
-  /// 单例工厂，今之处已经使用 [CloudBase.single] 或
-  /// [CloudBase.create] 创建后使用，直接使用会抛出
-  /// 找不到对象的异常
-  factory CloudBase([CloudBaseCoreCredentials credentials]) =>
-      CloudBase.single(credentials);
+    // 如果存在实例，则更新为最新创建的实例
+    if (_instances.containsKey(credentials.envId)) {
+      _instances.update(credentials.envId, (_) => this);
+
+      // 默认处理选择，不存在直接 put 到缓存一个新的实例
+    } else {
+      _instances.putIfAbsent(credentials.envId, () => this);
+    }
+  }
 
   /// 单例工厂创建或者获取 CloudBase 实例
   ///
@@ -47,7 +59,7 @@ class CloudBase {
   /// ```
   factory CloudBase.create(CloudBaseCoreCredentials credentials) {
     return _instances.putIfAbsent(
-        credentials.envId, () => CloudBase._(CloudBaseCore(credentials)));
+        credentials.envId, () => CloudBase(credentials));
   }
 
   /// 通过 [envId] 获取已经存在的实例。
