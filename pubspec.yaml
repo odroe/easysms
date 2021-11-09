@@ -1,14 +1,17 @@
 name: easysms
-description: A simple command-line application.
+description: >-
+  Easy to use, simple configuration can send SMS messages to Phone. 
+  Easily expandable gateways, messages customized according to scenarios.
 version: 1.0.0
-# homepage: https://www.example.com
+# homepage: https://github.com/odroe/easysms
+repository: https://github.com/odroe/easysms
 
 environment:
   sdk: '>=2.14.4 <3.0.0'
 
-
-# dependencies:
-#   path: ^1.8.0
+dependencies: 
+  crypto: ^3.0.1
+  http: ^0.13.4
 
 dev_dependencies:
   lints: ^1.0.0
