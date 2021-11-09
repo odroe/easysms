@@ -3,10 +3,11 @@
 Easy to use, simple configuration can send SMS messages to Phone. 
 Easily expandable gateways, messages customized according to scenarios.
 
-## Geteway
+## Readmap
 
 - [x] Tencent Cloud SMS
 - [ ] Aliyun SMS
+- [ ] Yunpian SMS
 
 ## Installation
 
