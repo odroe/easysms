@@ -1,40 +1,30 @@
 import 'package:easysms/easysms.dart';
-
-/// Create a tencent cloud SMS geteway
-const Geteway geteway = TencentCloudGeteway(
-  appId: '<You Tencent Cloud SMS APP ID>',
-  secretId: '<You Tencent Cloud Secret ID>',
-  secretKey: '<You Tencent Cloud Secret Key>',
-);
-
-/// Create a message
-class VerificationCodeNessage extends Message {
-  @override
-  Future<void> initialize() async {
-    // Initialize your message
-  }
-
-  @override
-  String get content => '<You Message content>';
-
-  @override
-  List<String> get data => [
-        '<You message data>', /* More data */
-      ];
-
-  @override
-  String get signName => '<You sign name>';
-
-  @override
-  String get template => "<You sms template id>";
-}
-
-final Message message = VerificationCodeNessage();
+import 'package:easysms/tencentcloud.dart';
 
 void main() async {
-  // Send a message
-  final response =
-      await geteway.send('<You E.164 formated phone number>', message);
+  final gateway = TencentCloudSmsGateway(
+    appId: '<You app ID>',
+    secretId: '<You secret ID>',
+    secretKey: '<You secret key>',
+  );
+  final easysms = EasySMS(
+    gateways: [gateway],
+  );
 
-  print(response.body);
+  final message = Message.fromValues(
+    template: '<You template ID>',
+    data: {
+      'SignName': "<You sign name>",
+      'TemplateParamSet': [
+        '<Param 1>',
+        '<Param 2>',
+        // ...
+      ],
+    },
+  );
+
+  final phone = PhoneNumber('<You country code>', '<You phone number>');
+  final response = await easysms.send([phone], message);
+
+  print('Status: ${response.first.success}'); // true or false
 }
