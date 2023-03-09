@@ -23,7 +23,8 @@ void main() async {
     },
   );
 
-  final phone = PhoneNumber('<You country code>', '<You phone number>');
+  // Change 86 to your country code.
+  final phone = PhoneNumber(86, '<You phone number>');
   final response = await easysms.send([phone], message);
 
   print('Status: ${response.first.success}'); // true or false

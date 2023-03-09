@@ -1,7 +1,7 @@
 /// Phone number.
 class PhoneNumber {
   /// Country code.
-  final String countryCode;
+  final int countryCode;
 
   /// National number.
   final String nationalNumber;
@@ -10,5 +10,5 @@ class PhoneNumber {
   const PhoneNumber(this.countryCode, this.nationalNumber);
 
   @override
-  String toString() => countryCode + nationalNumber;
+  String toString() => '$countryCode$nationalNumber';
 }

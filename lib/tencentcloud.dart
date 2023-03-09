@@ -339,11 +339,9 @@ class TencentCloudSmsGateway implements Gateway {
   }
 
   /// Generate the phone number.
+  ///
+  /// The phone number must be in the E.164 format.
   String generatePhoneNumber(PhoneNumber phoneNumber) {
-    final countryCode = phoneNumber.countryCode.startsWith('+')
-        ? phoneNumber.countryCode
-        : '+${phoneNumber.countryCode}';
-
-    return countryCode + phoneNumber.nationalNumber;
+    return '+${phoneNumber.countryCode}${phoneNumber.nationalNumber}';
   }
 }
