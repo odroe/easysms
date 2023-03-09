@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "lib/**"
+      - "pubspec.yaml"
+      - ".github/workflows/release-please.yml"
 jobs:
   release-please:
     runs-on: ubuntu-latest
@@ -11,3 +15,4 @@ jobs:
         with:
           release-type: dart
           package-name: easysms
+          release-as: 2.0.0
