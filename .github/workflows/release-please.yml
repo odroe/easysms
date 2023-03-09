@@ -23,4 +23,4 @@ jobs:
   publish:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
