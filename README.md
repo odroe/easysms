@@ -127,7 +127,8 @@ final message = Message.fromCallbacks(
 
 | Gateway                  | Platform                                                   | Description               |
 | ------------------------ | ---------------------------------------------------------- | ------------------------- |
-| `TencentCloudSmsGateway` | [Tencent Cloud SMS](https://cloud.tencent.com/product/sms) | Tencent Cloud SMS Gateway |
+| `TencentCloudSmsGateway` | [Tencent Cloud SMS](https://cloud.tencent.com/product/sms) | Tencent Cloud SMS gateway |
+| `SmsBaoGateway`          | [短信宝](https://www.smsbao.com/)                          | 短信宝 SMS gateway        |
 
 **If the platform you need to use is not listed here, you have several ways to support it:**
 
