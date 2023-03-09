@@ -23,6 +23,4 @@ jobs:
   publish:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: dart-lang/setup-dart/.github/workflows/publish.yml
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml
