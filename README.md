@@ -1,7 +1,8 @@
 # EasySMS
 
-Easy to use, simple configuration can send SMS messages to Phone.
-Easily expandable gateways, messages customized according to scenarios.
+Easy to use, simple configuration can send SMS messages to Phone. Easily expandable gateways, messages customized according to scenarios.
+
+[![pub package](https://img.shields.io/pub/v/easysms.svg)](https://pub.dev/packages/easysms)
 
 ## Installation
 
