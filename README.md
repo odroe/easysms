@@ -3,6 +3,7 @@
 Easy to use, simple configuration can send SMS messages to Phone. Easily expandable gateways, messages customized according to scenarios.
 
 [![pub package](https://img.shields.io/pub/v/easysms.svg)](https://pub.dev/packages/easysms)
+[![test](https://github.com/odroe/easysms/actions/workflows/test.yml/badge.svg)](https://github.com/odroe/easysms/actions/workflows/test.yml)
 
 ## Installation
 

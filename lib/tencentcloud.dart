@@ -317,7 +317,7 @@ class TencentCloudSmsGateway implements Gateway {
         .toList()
       ..sort((a, b) => a.key.compareTo(b.key));
 
-    return entries.map((e) => '${e.key}:${e.value}').join('\n') + '\n';
+    return '${entries.map((e) => '${e.key}:${e.value}').join('\n')}\n';
   }
 
   /// Generate the timestamp.
