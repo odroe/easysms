@@ -10,9 +10,17 @@ on:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
     steps:
       - uses: google-github-actions/release-please-action@v3
+        id: release
         with:
           release-type: dart
           package-name: easysms
+          include-v-in-tag: true
           release-as: 2.0.0
+  publish:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created }}
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
