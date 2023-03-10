@@ -71,7 +71,6 @@ class SmsBaoGateway implements Gateway {
   Future<Iterable<Response>> send(
       Iterable<PhoneNumber> to, Message message, http.Client client) async {
     final requests = await groupRequests(to, message);
-    print(requests);
     final responses = requests.map<Future<Iterable<Response>>>((e) async {
       final streamedResponse = await client.send(e.key);
       final httpResponse = await http.Response.fromStream(streamedResponse);
