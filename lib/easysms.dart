@@ -1,4 +1,4 @@
-library odroe.easysms;
+library easysms;
 
 export 'src/easysms.dart';
 export 'src/gateway.dart';
