@@ -3,7 +3,7 @@ library odroe.easysms.tencentcloud;
 import 'dart:convert' as convert;
 
 import 'package:crypto/crypto.dart' as crypto;
-import 'package:http/http.dart' as http;
+import 'package:webfetch/webfetch.dart' as webfetch;
 
 import 'easysms.dart';
 
@@ -47,18 +47,19 @@ class TencentCloudSmsGateway implements Gateway {
 
   @override
   Future<Iterable<Response>> send(
-      Iterable<PhoneNumber> to, Message message, http.Client client) async {
+      Iterable<PhoneNumber> to, Message message) async {
     final json = await generateJsonBody(to, message);
     final body = convert.json.encode(json);
     final headers = await generateHeaders(body);
 
-    final request = http.Request(_method, _endpoint)
-      ..body = body
-      ..headers.addAll(headers);
-    final streamedResponse = await client.send(request);
-    final httpResponse = await http.Response.fromStream(streamedResponse);
+    final httpResponse = await webfetch.fetch(
+      _endpoint,
+      method: _method,
+      body: body,
+      headers: headers,
+    );
 
-    final results = convert.json.decode(httpResponse.body);
+    final results = await httpResponse.json() as Map;
     final response = results['Response'] as Map;
 
     // If contains `Error` returns all phone numbers failed.

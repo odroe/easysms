@@ -1,4 +1,4 @@
-import 'package:http/http.dart' as http;
+import 'package:webfetch/webfetch.dart' as webfetch;
 
 import 'gateway.dart';
 import 'phone_number.dart';
@@ -8,7 +8,7 @@ class Response {
   final Gateway gateway;
   final PhoneNumber to;
   final bool success;
-  final http.Response response;
+  final webfetch.Response response;
 
   const Response({
     required this.gateway,

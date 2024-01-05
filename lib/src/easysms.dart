@@ -1,5 +1,3 @@
-import 'package:http/http.dart' as http;
-
 import 'gateway.dart';
 import 'message.dart';
 import 'phone_number.dart';
@@ -27,10 +25,8 @@ class EasySMS {
   /// Sends a message to a phone number.
   Future<Iterable<Response>> send(
       Iterable<PhoneNumber> to, Message message) async {
-    final results = await _withClient((client) async {
-      final gateway = await strategy.select(gateways);
-      return gateway.send(to, message, client);
-    });
+    final gateway = await strategy.select(gateways);
+    final results = await gateway.send(to, message);
 
     return _retryFailed(results, message);
   }
@@ -52,25 +48,10 @@ class EasySMS {
     final failedPhoneNumbers = failedResults.map((e) => e.to).toSet();
 
     // Retry failed phone numbers
-    final retryResults = await _withClient((client) async {
-      final gateway = await strategy.select(availableGateways);
-
-      return gateway.send(failedPhoneNumbers, message, client);
-    });
+    final gateway = await strategy.select(availableGateways);
+    final retryResults = await gateway.send(failedPhoneNumbers, message);
 
     // Merge results
     return results.followedBy(await _retryFailed(retryResults, message));
-  }
-
-  /// With http client
-  Future<Iterable<Response>> _withClient<T>(
-      Future<Iterable<Response>> Function(http.Client) fn) async {
-    final client = http.Client();
-
-    try {
-      return await fn(client).timeout(timeout);
-    } finally {
-      client.close();
-    }
   }
 }

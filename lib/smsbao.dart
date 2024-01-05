@@ -3,7 +3,7 @@ library odroe.easysms.smsbao;
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
-import 'package:http/http.dart' as http;
+import 'package:webfetch/webfetch.dart' as webfetch;
 
 import 'easysms.dart';
 
@@ -69,20 +69,23 @@ class SmsBaoGateway implements Gateway {
 
   @override
   Future<Iterable<Response>> send(
-      Iterable<PhoneNumber> to, Message message, http.Client client) async {
+      Iterable<PhoneNumber> to, Message message) async {
     final requests = await groupRequests(to, message);
     final responses = requests.map<Future<Iterable<Response>>>((e) async {
-      final streamedResponse = await client.send(e.key);
-      final httpResponse = await http.Response.fromStream(streamedResponse);
+      final results = <Response>[];
+      final response = await webfetch.fetch(e.key);
 
-      return e.value.map(
-        (to) => Response(
-          gateway: this,
-          to: to,
-          success: httpResponse.body == '0',
-          response: httpResponse,
-        ),
-      );
+      for (final value in e.value) {
+        final success = await (response.clone().text()) == '0';
+        final result = Response(
+            gateway: this,
+            to: value,
+            success: success,
+            response: response.clone());
+        results.add(result);
+      }
+
+      return results;
     });
 
     final results = await Future.wait(responses);
@@ -93,8 +96,8 @@ class SmsBaoGateway implements Gateway {
   /// Groups requests.
   ///
   /// Group Chinese Mainland and international mobile phone numbers.
-  Future<Iterable<MapEntry<http.Request, Iterable<PhoneNumber>>>> groupRequests(
-      Iterable<PhoneNumber> to, Message message) async {
+  Future<Iterable<MapEntry<webfetch.Request, Iterable<PhoneNumber>>>>
+      groupRequests(Iterable<PhoneNumber> to, Message message) async {
     final groups = <bool, Set<PhoneNumber>>{
       true: to.where((phone) => isChineseMainland(phone)).toSet(),
       false: to.where((phone) => !isChineseMainland(phone)).toSet(),
@@ -102,7 +105,7 @@ class SmsBaoGateway implements Gateway {
 
     final resutls = groups.entries.map((e) async {
       final url = await generateRequestUrl(e.value, message, e.key);
-      final request = http.Request('GET', url);
+      final request = webfetch.Request(url);
 
       return MapEntry(request, e.value);
     });
