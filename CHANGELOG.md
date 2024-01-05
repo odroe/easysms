@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.0.0](https://github.com/odroe/easysms/compare/v2.1.1...v3.0.0) (2024-01-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* new version
+* new version
+
+### Features
+
+* changge library name ([14ac8f4](https://github.com/odroe/easysms/commit/14ac8f4fcd77e3cfa837d3df70457e90804901e6))
+
+
+### Miscellaneous Chores
+
+* example ([41a0fa9](https://github.com/odroe/easysms/commit/41a0fa99bed8b9ac54e7a96bbe7d8c3af56b43e6))
+
 ## [2.1.1](https://github.com/odroe/easysms/compare/v2.1.0...v2.1.1) (2023-03-10)
 
 
