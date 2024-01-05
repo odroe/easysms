@@ -4,9 +4,9 @@ on:
     branches:
       - main
     paths:
-      - "lib/**"
-      - "pubspec.yaml"
-      - ".github/workflows/release-please.yml"
+      - 'lib/**'
+      - 'pubspec.yaml'
+      - '.github/workflows/release-please.yml'
 jobs:
   release-please:
     runs-on: ubuntu-latest
