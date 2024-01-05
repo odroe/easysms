@@ -7,9 +7,7 @@ void main() async {
     secretId: '<You secret ID>',
     secretKey: '<You secret key>',
   );
-  final easysms = EasySMS(
-    gateways: [gateway],
-  );
+  final easysms = EasySMS(gateways: [gateway]);
 
   final message = Message.fromValues(
     template: '<You template ID>',
