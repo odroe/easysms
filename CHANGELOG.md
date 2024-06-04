@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/odroe/easysms/compare/v3.0.0...v3.0.1) (2024-06-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency webfetch to ^0.0.17 ([#13](https://github.com/odroe/easysms/issues/13)) ([ce8707d](https://github.com/odroe/easysms/commit/ce8707dca896d99d09807b36f3fdd3a087bb933e))
+
 ## [3.0.0](https://github.com/odroe/easysms/compare/v2.1.1...v3.0.0) (2024-01-05)
 
 
