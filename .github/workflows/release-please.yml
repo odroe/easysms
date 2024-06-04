@@ -10,8 +10,13 @@ on:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     steps:
       - uses: google-github-actions/release-please-action@v4
+        id: release
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+      - uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+        if: ${{ steps.release.outputs.release_created }}
