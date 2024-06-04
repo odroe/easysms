@@ -1,4 +1,4 @@
-name: release & publish
+name: Release & Publish
 on:
   push:
     branches:
@@ -9,11 +9,12 @@ on:
       - ".github/workflows/release-please.yml"
 jobs:
   release:
-    name: release
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
@@ -21,8 +22,13 @@ jobs:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
   publish:
-    if: ${{ needs.release.steps.release.outputs.release_created }}
+    if: ${{ needs.release.outputs.release_created }}
     needs: release
     permissions:
       id-token: write
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+  demo:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ toJSON(needs.release) }}
