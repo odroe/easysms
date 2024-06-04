@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/odroe/easysms/compare/v3.0.1...v3.0.2) (2024-06-04)
+
+
+### Bug Fixes
+
+* Update order_strategy.dart ([0358f33](https://github.com/odroe/easysms/commit/0358f33c55844e5184bf4a3d1320f5a1cb31d96f))
+
 ## [3.0.1](https://github.com/odroe/easysms/compare/v3.0.0...v3.0.1) (2024-06-04)
 
 
