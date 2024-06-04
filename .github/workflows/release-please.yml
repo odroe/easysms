@@ -18,5 +18,3 @@ jobs:
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
-      - uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
-        if: ${{ steps.release.outputs.release_created }}
