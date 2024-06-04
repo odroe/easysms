@@ -1,4 +1,4 @@
-name: release-please
+name: release & publish
 on:
   push:
     branches:
@@ -8,10 +8,10 @@ on:
       - "pubspec.yaml"
       - ".github/workflows/release-please.yml"
 jobs:
-  release-please:
+  release:
+    name: release
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
       contents: write
       pull-requests: write
     steps:
@@ -20,3 +20,9 @@ jobs:
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+  publish:
+    if: ${{ needs.release.steps.release.outputs.release_created }}
+    needs: release
+    permissions:
+      id-token: write
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
