@@ -1,10 +1,10 @@
 import '../gateway.dart';
 import '../strategy.dart';
 
+int _counter = 0;
+
 class OrderStrategy implements Strategy {
   const OrderStrategy();
-
-  static int _counter = 0;
 
   @override
   Future<Gateway> select(Iterable<Gateway> gateways) async =>
