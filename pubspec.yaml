@@ -2,7 +2,7 @@ name: easysms
 description: >-
   Easy to use, simple configuration can send SMS messages to Phone. 
   Easily expandable gateways, messages customized according to scenarios.
-version: 3.0.2
+version: 3.0.3
 repository: https://github.com/odroe/easysms
 
 environment:
