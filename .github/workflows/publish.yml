@@ -5,4 +5,4 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+*'
 jobs:
   publish:
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1.7.2
